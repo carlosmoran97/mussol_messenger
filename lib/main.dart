@@ -80,10 +80,17 @@ class _AppSpashscreenState extends State<AppSplashscreen> {
       body: Stack(
         children: <Widget>[
           FlareActor(
+            'assets/Background.flr',
+            alignment: Alignment.bottomCenter,
+            shouldClip: false,
+            fit: BoxFit.cover,
+            animation: 'idle',
+          ),
+          FlareActor(
             'assets/Splash Screen.flr',
             alignment: Alignment.bottomCenter,
             shouldClip: false,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             animation: 'MUSSOL LOGO',
           ),
         ],

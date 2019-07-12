@@ -16,7 +16,7 @@ class OnboardingDesign extends StatelessWidget {
             'assets/Background.flr',
             alignment: Alignment.bottomCenter,
             shouldClip: false,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             animation: 'Background loop',
           ),
           FlareActor(

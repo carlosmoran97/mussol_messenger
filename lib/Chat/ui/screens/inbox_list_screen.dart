@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/Chat/model/chat.dart';
 import 'package:messenger/Chat/ui/widgets/bezier_fab.dart';
@@ -9,7 +10,6 @@ import 'package:messenger/widgets/messenger_app_bar.dart';
 import 'package:messenger/widgets/messenger_drawer.dart';
 import 'package:messenger/User/bloc/user_bloc.dart';
 import 'package:messenger/Chat/bloc/chat_bloc.dart';
-
 
 class InboxListScreen extends StatefulWidget {
   InboxListScreen({Key key, this.title}) : super(key: key);
@@ -31,7 +31,11 @@ class _InboxListScreenState extends State<InboxListScreen> {
             icon: Icon(
               Icons.autorenew,
             ),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+
+              });
+            },
           ),
           IconButton(
             icon: Icon(
@@ -49,17 +53,14 @@ class _InboxListScreenState extends State<InboxListScreen> {
         ),
         child: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () async{
+          onPressed: () async {
             String uid = (await userBloc.currentUser).uid;
-            DocumentReference userReference = await userBloc.getCurrentUserReference(uid);
-            Navigator.push(context, MaterialPageRoute(
-              builder: (BuildContext context){
-                return UserList(
-                  uid: uid,
-                  userReference: userReference
-                );
-              }
-            ));
+            DocumentReference userReference =
+                await userBloc.getCurrentUserReference(uid);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext context) {
+              return UserList(uid: uid, userReference: userReference);
+            }));
           },
           heroTag: null,
         ),
@@ -76,55 +77,102 @@ class _InboxListScreenState extends State<InboxListScreen> {
     );
   }
 
-  Widget _buildBody(){
-    return  FutureBuilder<FirebaseUser>(
-      future: userBloc.currentUser,
-      builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
-        if(!snapshot.hasData){
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-
-
-        return FutureBuilder<DocumentReference>(
-          future: userBloc.getCurrentUserReference(snapshot.data.uid),
-          builder: (BuildContext context, AsyncSnapshot<DocumentReference> snapshot) {
-            if(!snapshot.hasData){
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
-            DocumentReference loggedUserId = snapshot.data;
-            return StreamBuilder<QuerySnapshot>(
-              stream: chatBloc.getUserChats(snapshot.data),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if(!snapshot.hasData){
-                  return CircularProgressIndicator();
-                }
-
-                return ListView(
-                  children: snapshot.data.documents.reversed.toList().map((DocumentSnapshot ds){
-                    Chat chat = Chat(
-                      id: ds.documentID,
-                      subject: ds['subject'],
-                      lastMessage: ds['lastMessage'],
-                      users: ds['users'],
-                      reference: ds.reference,
-                    );
-                    return ChatItem(
-                      chat: chat,
-                      loggedUser: loggedUserId
-                    );
-                  }).toList(),
-                );
-              }
+  Widget _buildBody() {
+    return FutureBuilder<FirebaseUser>(
+        future: userBloc.currentUser,
+        builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
+          if (!snapshot.hasData) {
+//            return Center(
+//              child: CircularProgressIndicator(),
+//            );
+            return Center(
+              child: Container(
+                height: 148,
+                width: 148,
+                child: FlareActor(
+                  'assets/LoadingICON.flr',
+                  alignment: Alignment.bottomCenter,
+                  shouldClip: false,
+                  fit: BoxFit.cover,
+                  animation: 'Loading STAND LOOP',
+                ),
+              ),
             );
           }
-        );
-      }
-    );
-  }
 
+          return FutureBuilder<DocumentReference>(
+              future: userBloc.getCurrentUserReference(snapshot.data.uid),
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentReference> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: Container(
+                      height: 148,
+                      width: 148,
+                      child: FlareActor(
+                        'assets/LoadingICON.flr',
+                        alignment: Alignment.bottomCenter,
+                        shouldClip: false,
+                        fit: BoxFit.cover,
+                        animation: 'Loading STAND LOOP',
+                      ),
+                    ),
+                  );
+                }
+//                return Center(
+//                  child: Container(
+//                    height: 148,
+//                    width: 148,
+//                    child: FlareActor(
+//                      'assets/LoadingICON.flr',
+//                      alignment: Alignment.bottomCenter,
+//                      shouldClip: false,
+//                      fit: BoxFit.cover,
+//                      animation: 'Loading STAND LOOP',
+//                      // Loading
+//                      // Loading IN
+//                      // Loading OUT
+//                    ),
+//                  ),
+//                );
+
+                DocumentReference loggedUserId = snapshot.data;
+                return StreamBuilder<QuerySnapshot>(
+                    stream: chatBloc.getUserChats(snapshot.data),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: Container(
+                            height: 148,
+                            width: 148,
+                            child: FlareActor(
+                              'assets/LoadingICON.flr',
+                              alignment: Alignment.bottomCenter,
+                              shouldClip: false,
+                              fit: BoxFit.cover,
+                              animation: 'Loading STAND LOOP',
+                            ),
+                          ),
+                        );
+                      }
+
+                      return ListView(
+                        children: snapshot.data.documents.reversed
+                            .toList()
+                            .map((DocumentSnapshot ds) {
+                          Chat chat = Chat(
+                            id: ds.documentID,
+                            subject: ds['subject'],
+                            lastMessage: ds['lastMessage'],
+                            users: ds['users'],
+                            reference: ds.reference,
+                          );
+                          return ChatItem(chat: chat, loggedUser: loggedUserId);
+                        }).toList(),
+                      );
+                    });
+              });
+        });
+  }
 }

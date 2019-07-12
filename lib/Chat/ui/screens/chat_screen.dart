@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/Chat/model/chat.dart';
 
@@ -22,11 +23,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   var listMessage;
+  bool animateButton = false;
 
   final TextEditingController textEditingController =
       new TextEditingController();
   final ScrollController listScrollController = new ScrollController();
   final FocusNode focusNode = new FocusNode();
+  final FlareControls controls = FlareControls();
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +135,12 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {}
   }
 
+  void _playAnimation(){
+    onSendMessage(textEditingController.text, 0);
+    print("SEND");
+    controls.play("SEND ");
+  }
+
   Widget buildInput() {
     return Container(
       child: Row(
@@ -157,16 +166,32 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
 
           // Button send message
-          Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 8.0),
-              child: new IconButton(
-                icon: new Icon(Icons.send),
-                onPressed: () => onSendMessage(textEditingController.text, 0),
-                color: Theme.of(context).primaryColor,
+          GestureDetector(
+            onTap: _playAnimation,
+            child: Material(
+              child: Transform(
+                transform: Matrix4.translationValues(0, -15, 0),
+                child: new Container(
+                  width: 48,
+                  height: 48,
+                  margin: new EdgeInsets.symmetric(horizontal: 8.0),
+//              child: new IconButton(
+//                icon: new Icon(Icons.send),
+//                onPressed: () => onSendMessage(textEditingController.text, 0),
+//                color: Theme.of(context).primaryColor,
+//              ),
+                    child: FlareActor(
+                      'assets/SEND BUTTON.flr',
+                      alignment: Alignment.bottomCenter,
+                      shouldClip: false,
+                      fit: BoxFit.contain,
+                      animation: "SEND",
+                      controller: controls,
+                    ),
+                ),
               ),
+              color: Colors.white,
             ),
-            color: Colors.white,
           ),
         ],
       ),
