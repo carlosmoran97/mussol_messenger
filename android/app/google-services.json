@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "861652994619",
+    "firebase_url": "https://messenger-98424.firebaseio.com",
+    "project_id": "messenger-98424",
+    "storage_bucket": "messenger-98424.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861652994619:android:39a59b40751f8833",
+        "android_client_info": {
+          "package_name": "com.mussolam.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861652994619-i0cqqs7hi7msco26ggq5sia194p71aob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mussolam.messenger",
+            "certificate_hash": "c5ec987933f79acd017e6065d0550885537ad905"
+          }
+        },
+        {
+          "client_id": "861652994619-g5m6mud04dn6at05i7qjj5i20q24i6en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxIMIPhEl_qRMtoRqFpvNnkqEm_-CwSFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861652994619-g5m6mud04dn6at05i7qjj5i20q24i6en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
