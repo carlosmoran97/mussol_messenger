@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
+  dots_indicator:
+    dependency: "direct main"
+    description:
+      name: dots_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -81,21 +88,17 @@ packages:
   flare_dart:
     dependency: transitive
     description:
-      path: flare_dart
-      ref: dev
-      resolved-ref: "307d63f824042d61059edf1cec54b96789625d97"
-      url: "git://github.com/2d-inc/Flare-Flutter.git"
-    source: git
+      name: flare_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.4.3"
   flare_flutter:
     dependency: "direct main"
     description:
-      path: flare_flutter
-      ref: "4aebb0ff5b98c7bcf2183c6bac8226cc7ddf5402"
-      resolved-ref: "4aebb0ff5b98c7bcf2183c6bac8226cc7ddf5402"
-      url: "git://github.com/2d-inc/Flare-Flutter.git"
-    source: git
-    version: "1.5.0"
+      name: flare_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -176,6 +179,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.22.0"
   sky_engine:
     dependency: transitive
     description: flutter

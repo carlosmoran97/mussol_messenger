@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:messenger/widgets/home_screen.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
-import 'package:messenger/widgets/material_page_revealer.dart';
+import 'package:messenger/widgets/onboarding_design.dart';
 
 
 
@@ -24,11 +23,13 @@ class MyApp extends StatelessWidget {
       ),
       home: AppSplashscreen(
         seconds: 6,
-        nextPage: MaterialPageRevealer()
+        nextPage: OnboardingDesign(),
       ),
     );
   }
 }
+
+
 
 class AppSplashscreen extends StatefulWidget {
 

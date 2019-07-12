@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class User{
@@ -6,6 +7,7 @@ class User{
   final String email;
   final String photoUrl;
   final List myChats;
+  final DocumentReference reference;
 
   User({
     Key key,
@@ -14,6 +16,7 @@ class User{
     @required this.email,
     @required this.photoUrl,
     this.myChats,
+    this.reference,
   });
 
 }

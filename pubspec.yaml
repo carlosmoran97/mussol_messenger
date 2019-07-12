@@ -26,12 +26,15 @@ dependencies:
   firebase_auth:
   google_sign_in: ^4.0.4
   cloud_firestore: ^0.9.13
-  flare_flutter:
-    git:
-      url: git://github.com/2d-inc/Flare-Flutter.git
-      ref: 4aebb0ff5b98c7bcf2183c6bac8226cc7ddf5402
-      path: flare_flutter
+  #flare_flutter:
+  #  git:
+  #    url: git://github.com/2d-inc/Flare-Flutter.git
+  #    ref: 4aebb0ff5b98c7bcf2183c6bac8226cc7ddf5402
+  #    path: flare_flutter
+  flare_flutter: 1.5.3
   cached_network_image: ^0.8.0
+  dots_indicator: 0.0.4
+  rxdart: 0.22.0
 
 dev_dependencies:
   flutter_test:
@@ -80,10 +83,5 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  fonts:
-    - family: FlamanteRoma
-      fonts:
-        - asset: assets/fonts/Flamante-Roma-Medium.ttf
-        - asset: assets/fonts/Flamante-Roma-MediumItalic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

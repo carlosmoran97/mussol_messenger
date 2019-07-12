@@ -42,4 +42,14 @@ class UserApiProvider {
     await _auth.signOut().then((onValue) => print("Sesión cerrada"));
     googleSignIn.signOut();
   }
+
+  Stream<QuerySnapshot> getCloudFirestoreUsers(){
+    return _db.collection('users').snapshots();
+  }
+  
+  Future<DocumentReference> getCurrentUserReference(String uid)async{
+    DocumentReference user = (await _db.collection('users').where('uid', isEqualTo: uid).getDocuments()).documents.first.reference;
+    return user;
+  }
+
 }
